@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BDG Premium - Get Started</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
 body {
     font-family: 'Poppins', sans-serif;
@@ -65,14 +66,16 @@ input, select {
     font-size: 16px;
 }
 select {
-    background-color: #000000 !important; /* Black background for dropdown */
-    color: #ffffff !important; /* White text */
+    background-color: #000000 !important;
+    color: #ffffff !important;
 }
 .phone-box {
     display: flex;
     gap: 10px;
 }
 .phone-box select { width: 40%; }
+
+/* Button */
 button {
     width: 100%;
     padding: 15px;
@@ -84,22 +87,62 @@ button {
     border-radius: 50px;
     cursor: pointer;
 }
+
+/* Loader */
+.loader-box {
+    position: fixed;
+    top:0; left:0; right:0; bottom:0;
+    background: rgba(0,0,0,0.78);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+    flex-direction: column;
+}
+
+.loader {
+    width:80px;
+    height:80px;
+    border:6px solid #FFD700;
+    border-top-color: transparent;
+    border-radius:50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Success popup */
+.success-popup {
+    margin-top:20px;
+    font-size:28px;
+    color:#FFD700;
+    font-weight:800;
+    opacity:0;
+    animation: fadeIn 0.8s forwards;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity:0; transform: scale(0.9); }
+    to { opacity:1; transform: scale(1); }
+}
 </style>
 </head>
+
 <body>
 
 <div class="container">
 
-    <!-- BDG PREMIUM TITLE -->
     <h1>BDG PREMIUM</h1>
 
-    <!-- Tabs -->
     <div class="tabs">
         <button class="tab active" onclick="showForm('login')">Login</button>
         <button class="tab" onclick="showForm('signup')">Signup</button>
     </div>
 
-    <!-- LOGIN FORM -->
+    <!-- LOGIN -->
     <form id="login" class="form active">
         <div class="form-group">
             <label>ID</label>
@@ -112,7 +155,7 @@ button {
         <button type="button" onclick="loginNow()">Login</button>
     </form>
 
-    <!-- SIGNUP FORM -->
+    <!-- SIGNUP -->
     <form id="signup" class="form">
         <div class="form-group">
             <label>Name</label>
@@ -143,7 +186,6 @@ button {
 </div>
 
 <script>
-/* TAB SWITCHING */
 function showForm(form) {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.form').forEach(f => f.classList.remove('active'));
@@ -151,18 +193,38 @@ function showForm(form) {
     document.getElementById(form).classList.add('active');
 }
 
-/* FIXED LOGIN DATA */
+/* Correct login details */
 const fixedID = "premiumbdg@id";
 const fixedPass = "BDGPREMIUMKEY@KEY";
 
-/* LOGIN FUNCTION */
+/* LOGIN + LOADER + SUCCESS AFTER 1 SEC */
 function loginNow() {
     let id = document.getElementById("login-id").value;
     let pass = document.getElementById("login-pass").value;
+
     if(id === fixedID && pass === fixedPass){
-        alert("Login Successful!");
+
+        // Create loader
+        let box = document.createElement("div");
+        box.className = "loader-box";
+        box.innerHTML = `<div class="loader"></div>`;
+        document.body.appendChild(box);
+
+        // Show success after 1 second
+        setTimeout(() => {
+            box.innerHTML = `
+                <div class="loader"></div>
+                <div class="success-popup">LOGIN SUCCESSFUL ✔</div>
+            `;
+        }, 1000);
+
+        // Redirect after 2 seconds
+        setTimeout(() => {
+            window.location.href = "hackbdgpremium.html";
+        }, 2000);
+
     } else {
-        alert("Please fill correct ID & Password.\nAccount not found — please signup then login.");
+        alert("Incorrect ID or Password.\nTry Again.");
     }
 }
 
@@ -176,12 +238,12 @@ function continuePay() {
         alert("Please fill all fields.");
         return;
     }
-    let url = `https://www.gocreator.in/dp?product=3faac597-13fb-4577-8ecf-b58a805e2bc6&name=${encodeURIComponent(name)}&number=${encodeURIComponent(number)}&gmail=${encodeURIComponent(gmail)}&amount=${amount}`;
+    let url =
+     `https://www.gocreator.in/dp?product=3faac597-13fb-4577-8ecf-b58a805e2bc6&name=${encodeURIComponent(name)}&number=${encodeURIComponent(number)}&gmail=${encodeURIComponent(gmail)}&amount=${amount}`;
     window.location.href = url;
 }
 
 /* COUNTRY LIST */
-const countrySelect = document.getElementById("country-code");
 const countries = [
   {code:"+1", flag:"🇺🇸", name:"United States"},
   {code:"+44", flag:"🇬🇧", name:"United Kingdom"},
@@ -218,17 +280,15 @@ const countries = [
   {code:"+380", flag:"🇺🇦", name:"Ukraine"}
 ];
 
-/* Populate select */
+const countrySelect = document.getElementById("country-code");
 countries.forEach(c => {
     let opt = document.createElement("option");
     opt.value = c.code;
     opt.textContent = `${c.flag} ${c.code} (${c.name})`;
     countrySelect.appendChild(opt);
 });
-
-// Set default India
 countrySelect.value = "+91";
-
 </script>
+
 </body>
 </html>
