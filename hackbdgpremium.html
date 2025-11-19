@@ -37,34 +37,32 @@
     position:relative;
   }
 
-  .logo {
+  .logo{
     width:220px;
     height:220px;
     border-radius:50%;
     margin:0 auto 26px;
-    overflow:hidden;
     background:#111;
     display:flex;
     align-items:center;
     justify-content:center;
-    box-shadow:0 0 30px rgba(255,215,0,0.25), inset 0 0 40px rgba(0,0,0,0.6);
+    overflow:hidden;
     border:4px solid rgba(255,215,0,0.12);
+    box-shadow:0 0 30px rgba(255,215,0,0.25), inset 0 0 40px rgba(0,0,0,0.6);
   }
   .logo img{
-    width:86%;
-    height:86%;
+    max-width:100%;
+    max-height:100%;
     object-fit:contain;
     display:block;
-    filter: drop-shadow(0 6px 10px rgba(0,0,0,0.6));
   }
 
   h1.title{
     margin:6px 0 28px;
     font-size:34px;
-    letter-spacing:2px;
     color:var(--gold);
+    letter-spacing:2px;
     text-transform:uppercase;
-    text-shadow:0 0 18px rgba(255,215,0,0.15);
   }
 
   .options{
@@ -72,9 +70,9 @@
     gap:18px;
     justify-content:center;
     flex-wrap:wrap;
-    margin-bottom:8px;
   }
 
+  /* Button Animation */
   .opt-btn{
     background:linear-gradient(135deg,var(--gold),#ff9a00);
     border:none;
@@ -82,17 +80,27 @@
     border-radius:999px;
     color:#000;
     font-weight:700;
-    letter-spacing:1px;
     cursor:pointer;
     min-width:170px;
-    box-shadow:0 10px 24px rgba(255,215,0,0.2);
     display:inline-flex;
     gap:10px;
     align-items:center;
     justify-content:center;
-    transition:transform .18s ease, box-shadow .18s ease;
+    box-shadow:0 10px 24px rgba(255,215,0,0.2);
+    transition: all 0.3s ease;
+    position:relative;
+    overflow:hidden;
+    animation: glowPulse 2s infinite;
   }
-  .opt-btn:hover{ transform:translateY(-4px); box-shadow:0 18px 34px rgba(255,215,0,0.3); }
+  .opt-btn:hover{
+    transform:translateY(-4px);
+    box-shadow:0 0 20px 5px rgba(255,215,0,0.6),0 10px 34px rgba(255,215,0,0.4);
+  }
+
+  @keyframes glowPulse{
+    0%,100%{ box-shadow: 0 0 20px rgba(255,215,0,0.2); }
+    50%{ box-shadow: 0 0 40px rgba(255,215,0,0.5); }
+  }
 
   .small-note{
     margin-top:12px;
@@ -102,96 +110,44 @@
   }
 
   .modal-backdrop{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.6);
-    display:none;
-    align-items:center;
-    justify-content:center;
+    position:fixed; inset:0; background:rgba(0,0,0,0.6);
+    display:none; align-items:center; justify-content:center;
     z-index:999;
-    padding:16px;
   }
   .modal-backdrop.show{ display:flex; }
 
   .modal{
-    width:100%;
-    max-width:520px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+    width:100%; max-width:520px;
+    background:rgba(255,255,255,0.04);
     border-radius:14px;
     padding:22px;
-    border:1px solid rgba(255,215,0,0.08);
-    box-shadow:0 24px 60px rgba(0,0,0,0.7);
-    text-align:left;
   }
-
-  .modal h2{
-    margin:0 0 10px;
-    color:var(--gold);
-    font-size:20px;
-    text-transform:uppercase;
-    letter-spacing:1px;
-  }
-
-  .modal .desc{ color:#ddd; font-size:14px; margin-bottom:14px; }
 
   .input-row{
-    display:flex;
-    gap:12px;
-    align-items:center;
-    margin-bottom:14px;
+    display:flex; gap:12px; margin-bottom:14px;
   }
-  .input-row input[type="text"]{
-    flex:1;
-    padding:12px 14px;
-    font-size:16px;
-    border-radius:8px;
+  input[type="text"]{
+    flex:1; padding:12px; border-radius:8px;
+    background:rgba(255,255,255,0.06); color:#fff;
     border:1px solid rgba(255,215,0,0.08);
-    background:rgba(255,255,255,0.03);
-    color:#fff;
-    outline:none;
   }
-  .input-row .btn-go{
-    min-width:110px;
-    padding:11px 14px;
-    border-radius:8px;
-    border:none;
-    background:var(--gold);
-    color:#000;
-    font-weight:700;
+
+  .btn-go{
+    min-width:110px; padding:11px;
+    border-radius:8px; border:none;
+    background:var(--gold); color:#000; font-weight:700;
     cursor:pointer;
+    animation: glowPulse 2s infinite;
   }
 
   .result-box{
-    margin-top:12px;
-    min-height:60px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    margin-top:12px; padding:12px; min-height:60px;
     border-radius:8px;
-    padding:12px;
-    border:1px dashed rgba(255,215,0,0.08);
-    background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.06));
-    color:#fff;
-    font-size:28px;
-    font-weight:800;
+    background:rgba(255,255,255,0.06);
+    font-size:28px; font-weight:800; text-align:center;
   }
 
-  .history {
-    margin-top:12px;
-    color:#ccc;
-    font-size:13px;
-  }
-
-  .close-x{
-    position:absolute;
-    top:12px;
-    right:14px;
-    background:transparent;
-    border:none;
-    color:#fff;
-    font-size:20px;
-    cursor:pointer;
-  }
+  .history{ margin-top:12px; font-size:13px; color:#ccc; }
 
   .big-display{ font-size:48px; }
   .small-display{ font-size:26px; }
@@ -199,155 +155,109 @@
   @media (max-width:520px){
     .logo{ width:160px; height:160px; }
     .opt-btn{ min-width:140px; padding:12px 16px; }
-    .modal{ padding:16px; }
   }
 </style>
 </head>
 <body>
 
-  <div class="wrap">
-    <div class="logo">
-      <img src="https://uploads.onecompiler.io/43by6n3b4/4455qbqpn/WhatsApp%20Image%202025-11-20%20at%2012.39.15%20AM.jpeg" alt="BDG Premium Logo">
-    </div>
-
-    <h1 class="title">BDG PREMIUM</h1>
-
-    <div class="options">
-      <button class="opt-btn" onclick="openModal('number')">🔢 Number Hack</button>
-      <button class="opt-btn" onclick="openModal('colour')">🎨 Colour Hack</button>
-      <button class="opt-btn" onclick="openModal('bigsmall')">🔠 Big / Small Hack</button>
-    </div>
-
-    <div class="small-note">Enter last 3 digits → Press GO → Result</div>
+<div class="wrap">
+  <div class="logo">
+    <img src="https://uploads.onecompiler.io/43by6n3b4/4455qbqpn/WhatsApp%20Image%202025-11-20%20at%2012.39.15%20AM.jpeg" alt="BDG Premium Logo">
   </div>
 
-  <!-- Modal -->
-  <div id="modalBackdrop" class="modal-backdrop" onclick="closeModal()">
-    <div class="modal" onclick="event.stopPropagation()">
-      <button class="close-x" onclick="closeModal()">✕</button>
-      <h2 id="modalTitle">Hack</h2>
-      <div class="desc" id="modalDesc">Enter 3 digits</div>
+  <h1 class="title">BDG PREMIUM</h1>
 
-      <div class="input-row">
-        <input id="digitInput" maxlength="3" placeholder="Enter last 3 digits">
-        <button class="btn-go" onclick="doGo()">GO</button>
-      </div>
-
-      <div id="resultBox" class="result-box">— Result will appear here —</div>
-
-      <div class="history">History: <span id="histList">none</span></div>
-    </div>
+  <div class="options">
+    <button class="opt-btn" onclick="openModal('number')">🔢 Number Hack</button>
+    <button class="opt-btn" onclick="openModal('colour')">🎨 Colour Hack</button>
+    <button class="opt-btn" onclick="openModal('bigsmall')">🔠 Big / Small Hack</button>
   </div>
+
+  <div class="small-note">Enter last 3 digits → Press GO → Result</div>
+</div>
+
+<!-- MODAL -->
+<div id="modalBackdrop" class="modal-backdrop" onclick="closeModal()">
+  <div class="modal" onclick="event.stopPropagation()">
+    <h2 id="modalTitle">Hack</h2>
+
+    <div class="input-row">
+      <input id="digitInput" maxlength="3" placeholder="Enter last 3 digits">
+      <button class="btn-go" onclick="doGo()">GO</button>
+    </div>
+
+    <div id="resultBox" class="result-box">— Result will appear here —</div>
+
+    <div class="history">History: <span id="histList">none</span></div>
+  </div>
+</div>
 
 <script>
-  const state = {
-    openFor: null,
-    prev: { number: null, colour: null, bigsmall: null },
-    hist: { number: [], colour: [], bigsmall: [] },
-    repeatChance: { 
-      number: 0.22,
-      colour: 0.22,
-      bigsmall: 0.10  // SLIGHTLY repeat — fixed
-    }
-  };
+const PERIOD_STORE = {};
+const state = { openFor: null, hist: { number:[], colour:[], bigsmall:[] } };
 
-  function openModal(type){
-    state.openFor = type;
-    document.getElementById("modalBackdrop").classList.add("show");
+function openModal(type){
+  state.openFor = type;
+  document.getElementById("modalBackdrop").classList.add("show");
+  document.getElementById("modalTitle").innerText =
+    type==="number" ? "Number Hack" :
+    type==="colour" ? "Colour Hack" :
+    "Big / Small Hack";
+  document.getElementById("digitInput").value="";
+  document.getElementById("resultBox").innerText="— Result will appear here —";
+  updateHistory();
+}
 
-    const titles = {
-      number: "Number Hack",
-      colour: "Colour Hack",
-      bigsmall: "Big / Small Hack"
-    };
+function closeModal(){ document.getElementById("modalBackdrop").classList.remove("show"); }
 
-    document.getElementById("modalTitle").innerText = titles[type];
-    document.getElementById("digitInput").value = "";
-    document.getElementById("resultBox").innerText = "— Result will appear here —";
+function digitInfluence(str){ let sum=0; for(let x of str) sum+=Number(x); return sum%10; }
 
-    updateHistory();
+function generateRandom(type, period){
+  const influence = digitInfluence(period);
+  if(type==="number"){ const arr=["0","1","2","3","4","5","6","7","8","9"]; return arr[(Math.random()*100+influence)%10|0]; }
+  if(type==="colour"){ const arr=["Red","Green"]; return arr[(Math.random()*100+influence)%2|0]; }
+  if(type==="bigsmall"){ const arr=["Big","Small"]; return arr[(Math.random()*100+influence)%2|0]; }
+}
+
+function doGo(){
+  let per = document.getElementById("digitInput").value.trim();
+  if(per.length>3) per = per.slice(0,3);
+  if(per.length===0){ alert("Enter last 3 digits"); return; }
+
+  const type = state.openFor;
+  if(!PERIOD_STORE[type]) PERIOD_STORE[type]={};
+  const now = Date.now();
+
+  if(PERIOD_STORE[type][per] && PERIOD_STORE[type][per].expire > now){
+    showResult(PERIOD_STORE[type][per].result);
+    return;
   }
 
-  function closeModal(){
-    document.getElementById("modalBackdrop").classList.remove("show");
-  }
+  const newRes = generateRandom(type, per);
+  PERIOD_STORE[type][per] = { result:newRes, expire: now + (2*60*1000) };
+  showResult(newRes);
+}
 
-  function digitInfluence(str){
-    if(!str) return 0;
-    let total = 0;
-    for(let ch of str) total += Number(ch);
-    return total % 10;
-  }
+function showResult(res){
+  const type = state.openFor;
+  const box = document.getElementById("resultBox");
+  box.className="result-box"; box.style.color="#fff";
 
-  function biasedRandom(type, arr, input){
-    const prev = state.prev[type];
+  if(type==="colour"){ box.style.color=res==="Red"?"#ff4444":"#33ff77"; box.style.fontSize="42px"; }
+  if(type==="bigsmall"){ box.classList.add(res==="Big"?"big-display":"small-display"); }
+  if(type==="number"){ box.style.fontSize="46px"; }
 
-    // Slight repeat logic based on type
-    if(prev !== null && Math.random() < state.repeatChance[type]){
-      return prev;
-    }
+  box.innerText=res;
+  state.hist[type].unshift(res);
+  if(state.hist[type].length>8) state.hist[type].pop();
+  updateHistory();
+}
 
-    const influence = digitInfluence(input);
-    const index = Math.floor((Math.random()*100 + influence) % arr.length);
-    return arr[index];
-  }
-
-  function doGo(){
-    let n = document.getElementById("digitInput").value.trim();
-
-    if(n.length > 3) n = n.slice(0,3);
-
-    let result;
-
-    if(state.openFor === "number")
-      result = biasedRandom("number", ["0","1","2","3","4","5","6","7","8","9"], n);
-
-    if(state.openFor === "colour")
-      result = biasedRandom("colour", ["Red", "Green"], n);
-
-    if(state.openFor === "bigsmall")
-      result = biasedRandom("bigsmall", ["Big", "Small"], n);
-
-    showResult(result);
-  }
-
-  function showResult(res){
-    const box = document.getElementById("resultBox");
-    const type = state.openFor;
-
-    state.prev[type] = res;
-    state.hist[type].unshift(res);
-    if(state.hist[type].length > 8) state.hist[type].pop();
-
-    box.style.color = "#fff";
-    box.classList.remove("big-display","small-display");
-
-    if(type === "colour"){
-      box.style.color = res === "Red" ? "#ff4d4d" : "#6be36b";
-      box.style.fontSize = "40px";
-    }
-
-    else if(type === "bigsmall"){
-      if(res === "Big") box.classList.add("big-display");
-      else box.classList.add("small-display");
-    }
-
-    else{
-      box.style.fontSize = "50px";
-    }
-
-    box.innerText = res;
-    updateHistory();
-  }
-
-  function updateHistory(){
-    const histEl = document.getElementById("histList");
-    const type = state.openFor;
-    if(!type) return;
-
-    const arr = state.hist[type];
-    histEl.innerText = arr.length ? arr.join(" • ") : "none";
-  }
+function updateHistory(){
+  const h = state.hist[state.openFor];
+  document.getElementById("histList").innerText=h.length?h.join(" • "):"none";
+}
 </script>
+
 </body>
 </html>
