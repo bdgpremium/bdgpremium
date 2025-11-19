@@ -169,8 +169,8 @@ button {
             </div>
         </div>
         <div class="form-group">
-            <label>Gmail</label>
-            <input type="email" id="gmail" placeholder="Enter Gmail">
+            <label>Email</label>
+            <input type="email" id="email" placeholder="Enter Email">
         </div>
         <div class="form-group">
             <label>Amount (Fixed)</label>
@@ -203,7 +203,6 @@ function loginNow() {
     let pass = document.getElementById("login-pass").value;
 
     if(id === fixedID && pass === fixedPass){
-
         // Create loader
         let box = document.createElement("div");
         box.className = "loader-box";
@@ -230,16 +229,22 @@ function loginNow() {
 
 /* SIGNUP REDIRECT */
 function continuePay() {
-    let name = document.getElementById("name").value;
-    let number = document.getElementById("country-code").value + document.getElementById("number").value;
-    let gmail = document.getElementById("gmail").value;
-    let amount = document.getElementById("amount").value;
-    if(name === "" || number === "" || gmail === ""){
+    const name = document.getElementById("name").value.trim();
+    const phone = document.getElementById("country-code").value + document.getElementById("number").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const amount = document.getElementById("amount").value;
+
+    if(!name || !phone || !email){
         alert("Please fill all fields.");
         return;
     }
-    let url =
-     `https://www.gocreator.in/dp?product=3faac597-13fb-4577-8ecf-b58a805e2bc6&name=${encodeURIComponent(name)}&number=${encodeURIComponent(number)}&gmail=${encodeURIComponent(gmail)}&amount=${amount}`;
+
+    const url = `https://www.gocreator.in/dp?product=3faac597-13fb-4577-8ecf-b58a805e2bc6` +
+                `&name=${encodeURIComponent(name)}` +
+                `&email=${encodeURIComponent(email)}` +      // Correct email param
+                `&phone=${encodeURIComponent(phone)}` +      // Correct phone param
+                `&amount=${encodeURIComponent(amount)}`;
+
     window.location.href = url;
 }
 
@@ -282,12 +287,13 @@ const countries = [
 
 const countrySelect = document.getElementById("country-code");
 countries.forEach(c => {
-    let opt = document.createElement("option");
+    const opt = document.createElement("option");
     opt.value = c.code;
     opt.textContent = `${c.flag} ${c.code} (${c.name})`;
     countrySelect.appendChild(opt);
 });
-countrySelect.value = "+91";
+countrySelect.value = "+91"; // default India
+
 </script>
 
 </body>
