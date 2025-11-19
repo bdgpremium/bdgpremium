@@ -6,6 +6,7 @@
     <title>BDG Premium Page</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -143,36 +144,29 @@
     </style>
 </head>
 <body>
+
     <div class="container">
-        <!-- BDG Logo centered and larger -->
+
+        <!-- LOGO -->
         <div class="logo">
-            <img src="bdg-logo.png" alt="BDG Logo"> <!-- Replace with actual BDG logo URL -->
-            <!-- Option to add logo: Uncomment below for upload -->
-            <!-- <input type="file" accept="image/*" onchange="previewLogo(event)" style="display: none;"> -->
+            <img src="bdg-logo.png" alt="BDG Logo">
         </div>
-        
-        <!-- Gold text -->
+
+        <!-- GOLD TITLE -->
         <h1 class="title">BDG PREMIUM</h1>
-        
-        <!-- Buttons -->
+
+        <!-- BUTTONS -->
         <div class="buttons">
-            <button onclick="alert"getstart.html"><i class="fas fa-play"></i> GET START</button>
-            <button onclick="alert"t.me/Mastermind05"><i class="fas fa-envelope"></i> CONTACT US</button>
+            <button onclick="window.location.href='getstart.html'">
+                <i class="fas fa-play"></i> GET START
+            </button>
+
+            <button onclick="window.location.href='https://t.me/Mastermind05'">
+                <i class="fas fa-envelope"></i> CONTACT US
+            </button>
         </div>
+
     </div>
 
-    <script>
-        // Optional: Function to preview uploaded logo
-        function previewLogo(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.querySelector('.logo img').src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-    </script>
 </body>
 </html>
